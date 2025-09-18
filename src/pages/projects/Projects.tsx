@@ -20,7 +20,7 @@ export const ProjectsPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="container flex flex-col mx-auto mt-10 p-8">
+    <div className="container flex flex-col mx-auto mt-5 p-5">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
