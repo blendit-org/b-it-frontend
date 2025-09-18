@@ -205,7 +205,7 @@ export function RegisterForm({ className }: React.ComponentProps<"form">) {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button
               type="submit"
-              className="w-full bg-gradient-to-r from-orange-500 to-pink-600 text-white font-bold py-2 rounded-lg shadow-lg hover:opacity-90 transition"
+              className="w-full cursor-pointer bg-gradient-to-r from-orange-500 to-pink-600 text-white font-bold py-2 rounded-lg shadow-lg hover:opacity-90 transition"
             >
               Sign Up
             </Button>

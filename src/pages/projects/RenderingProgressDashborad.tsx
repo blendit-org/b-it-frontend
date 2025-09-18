@@ -69,13 +69,14 @@ export const RenderingProgressDashboard: React.FC = () => {
                 transition={{ duration: 0.4, ease: "easeOut" }}
                 whileHover={{ scale: 1.03 }}
               >
-                <ProgressCard
+                <div className="border border-orange-500 rounded-2xl shadow-lg">
+                  <ProgressCard
                   project={project}
                   context="dashboard"
                   onGoToProjects={() => handleGoToProjects(project.projectId)}
-                  className="border border-orange-500 rounded-2xl shadow-lg"
-                  
                 />
+                </div>
+                
               </motion.div>
             ))}
           </AnimatePresence>
