@@ -9,7 +9,7 @@ interface IProps{
 
 const CommonLayout = ({children}:IProps) => {
     return (
-        <div>
+        <div className='bg-gradient-to-bl from-orange-50 to-orange-100 dark:from-orange-950 dark:to-neutral-950'>
             <Navbar />
             <div>{children}</div>
             <Footer/>

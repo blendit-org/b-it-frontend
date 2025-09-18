@@ -1,5 +1,6 @@
 import BlendItLogo from "@/assets/icons/logo"
 import RegisterForm from "@/components/modules/Authentication/RegisterForm";
+import { Link } from "react-router";
 
 
 export default function Register() {
@@ -14,13 +15,13 @@ export default function Register() {
             </div>
             <div className="flex flex-col gap-4 p-6 md:p-10">
                 <div className="flex justify-center gap-2 md:justify-start">
-                    <a href="#" className="flex items-center gap-2 font-medium">
+                    <Link to={"/"} className="flex items-center gap-2 font-medium">
                         <BlendItLogo />
-                    </a>
+                    </Link>
                 </div>
                 <div className="flex flex-1 items-center justify-center">
                     <div className="w-full max-w-xs">
-                        <RegisterForm/>
+                        <RegisterForm />
                     </div>
                 </div>
             </div>

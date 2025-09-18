@@ -1,22 +1,21 @@
 import BlendItLogo from "@/assets/icons/logo";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
-        <div>
-            <footer className="bg-background">
-                <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="w-full">
+            <footer className="relative z-10 w-full  px-4 py-16 transition-colors duration-500 sm:px-6 lg:px-8">
+                <div className="mx-auto max-w-screen-xl">
                     <div
-                        className="flex flex-col items-center gap-4 rounded-lg bg-orange-600 p-6 shadow-lg sm:flex-row sm:justify-between"
+                        className="flex flex-col items-center gap-4 rounded-lg bg-white dark:bg-orange-700 p-6 shadow-lg sm:flex-row sm:justify-between"
                     >
-                        <strong className="text-xl text-foreground sm:text-xl"> Utilize Your Time...</strong>
+                        <strong className="text-xl text-black dark:text-white sm:text-xl"> Utilize Your Time...</strong>
 
-                        <a
-                            className="inline-flex items-center gap-2 rounded-full border border-foreground bg-foreground px-8 py-3 text-orange-600 hover:bg-transparent hover:text-foreground focus:ring-3 focus:outline-hidden"
-                            href="#" //Will Add the Render file Link Here
+                        <Link 
+                            className="inline-flex items-center gap-2 rounded-full border border-black dark:border-white bg-black dark:bg-white px-8 py-3 text-white dark:text-black dark:hover:bg-orange-500 hover:text-black dark:hover:text-white focus:ring-3 focus:outline-hidden"
+                            to={"/render"}
                         >
-                            <span className="text-sm font-medium"> <Link to={"/render"}>blend:it here</Link> </span>
-
+                            <span className="text-sm font-medium">blend:it here</span>
                             <svg
                                 className="size-5 shadow-sm rtl:rotate-180"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -31,84 +30,84 @@ const Footer = () => {
                                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                                 />
                             </svg>
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
                         <div className="text-center sm:text-left">
-                            <p className="text-lg font-medium text-muted-foreground-900">About Us</p>
+                            <p className="text-lg font-medium text-black dark:text-white">About Us</p>
 
                             <ul className="mt-8 space-y-4 text-sm">
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#">
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#">
                                         Company History
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#"> Meet the Team </a>
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#"> Meet the Team </a>
                                 </li>
 
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#">
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#">
                                         Employee Handbook
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#"> Careers </a>
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#"> Careers </a>
                                 </li>
                             </ul>
                         </div>
 
                         <div className="text-center sm:text-left">
-                            <p className="text-lg font-medium text-muted-foreground-900">Our Services</p>
+                            <p className="text-lg font-medium text-black dark:text-white">Our Services</p>
 
                             <ul className="mt-8 space-y-4 text-sm">
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#">
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#">
                                         Web Development
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#"> Web Design </a>
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#"> Web Design </a>
                                 </li>
 
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#"> Marketing </a>
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#"> Marketing </a>
                                 </li>
 
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#"> Google Ads </a>
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#"> Google Ads </a>
                                 </li>
                             </ul>
                         </div>
 
                         <div className="text-center sm:text-left">
-                            <p className="text-lg font-medium text-muted-foreground-900">Resources</p>
+                            <p className="text-lg font-medium text-black dark:text-white">Resources</p>
 
                             <ul className="mt-8 space-y-4 text-sm">
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#"> Online Guides </a>
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#"> Online Guides </a>
                                 </li>
 
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#">
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#">
                                         Conference Notes
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#"> Forum </a>
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#"> Forum </a>
                                 </li>
 
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#"> Downloads </a>
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#"> Downloads </a>
                                 </li>
 
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#">
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#">
                                         Upcoming Events
                                     </a>
                                 </li>
@@ -116,15 +115,15 @@ const Footer = () => {
                         </div>
 
                         <div className="text-center sm:text-left">
-                            <p className="text-lg font-medium text-muted-foreground-900">Helpful Links</p>
+                            <p className="text-lg font-medium text-black dark:text-white">Helpful Links</p>
 
                             <ul className="mt-8 space-y-4 text-sm">
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#"> FAQs </a>
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#"> FAQs </a>
                                 </li>
 
                                 <li>
-                                    <a className="text-muted-foreground-700 transition hover:text-muted-foreground-700/75" href="#"> Support </a>
+                                    <a className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100" href="#"> Support </a>
                                 </li>
 
                                 <li>
@@ -132,7 +131,7 @@ const Footer = () => {
                                         className="group flex justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end"
                                         href="#"
                                     >
-                                        <span className="text-muted-foreground-700 transition group-hover:text-muted-foreground-700/75"> Live Chat </span>
+                                        <span className="text-gray-700 dark:text-gray-300 transition group-hover:text-gray-900 dark:hover:text-gray-100"> Live Chat </span>
 
                                         <span className="relative flex size-2">
                                             <span
@@ -153,7 +152,7 @@ const Footer = () => {
                                     href="#"
                                     rel="noreferrer"
                                     target="_blank"
-                                    className="text-teal-700 transition hover:text-teal-700/75"
+                                    className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100"
                                 >
                                     <span className="sr-only">Facebook</span>
                                     <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -171,7 +170,7 @@ const Footer = () => {
                                     href="#"
                                     rel="noreferrer"
                                     target="_blank"
-                                    className="text-teal-700 transition hover:text-teal-700/75"
+                                    className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100"
                                 >
                                     <span className="sr-only">Instagram</span>
                                     <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -189,7 +188,7 @@ const Footer = () => {
                                     href="#"
                                     rel="noreferrer"
                                     target="_blank"
-                                    className="text-teal-700 transition hover:text-teal-700/75"
+                                    className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100"
                                 >
                                     <span className="sr-only">Twitter</span>
                                     <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -205,7 +204,7 @@ const Footer = () => {
                                     href="#"
                                     rel="noreferrer"
                                     target="_blank"
-                                    className="text-teal-700 transition hover:text-teal-700/75"
+                                    className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100"
                                 >
                                     <span className="sr-only">GitHub</span>
                                     <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -223,7 +222,7 @@ const Footer = () => {
                                     href="#"
                                     rel="noreferrer"
                                     target="_blank"
-                                    className="text-teal-700 transition hover:text-teal-700/75"
+                                    className="text-gray-700 dark:text-gray-300 transition hover:text-gray-900 dark:hover:text-gray-100"
                                 >
                                     <span className="sr-only">Dribbble</span>
                                     <svg className="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -238,11 +237,11 @@ const Footer = () => {
                         </ul>
 
                         <div className="mt-16 sm:flex sm:items-center sm:justify-between">
-                            <div className="flex justify-center text-teal-600 sm:justify-start">
+                            <div className="flex justify-center text-orange-600 sm:justify-start">
                                 <BlendItLogo/>
                             </div>
 
-                            <p className="mt-4 text-center text-sm text-muted-foreground-500 sm:mt-0 sm:text-right">
+                            <p className="mt-4 text-center text-sm text-gray-500 sm:mt-0 sm:text-right">
                                 Copyright &copy; 2022. All rights reserved.
                             </p>
                         </div>

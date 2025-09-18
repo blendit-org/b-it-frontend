@@ -1,11 +1,14 @@
 import App from "@/App";
-import About from "@/pages/About";
-import Home from "@/pages/Home";
-import Login from "@/pages/Login";
-import Register from "@/pages/Register";
-import Render from "@/pages/Render";
-import Verify from "@/pages/Verify";
+import Generate3D from "@/pages/AiImageGenerator/Generate3D";
+import Gallery from "@/pages/Gallery/Gallery";
+import Home from "@/pages/Home/Home";
+import Login from "@/pages/Auth/Login";
+import Register from "@/pages/Auth/Register";
+import Render from "@/pages/Render/Render";
+import Verify from "@/pages/Auth/Verify";
 import { createBrowserRouter } from "react-router";
+import { CommunityPage } from "@/pages/Community/Community";
+import { ProjectsPage } from "@/pages/projects/Projects";
 
 const router = createBrowserRouter([
     {
@@ -17,12 +20,24 @@ const router = createBrowserRouter([
                 path: "/",
             },
             {
-                Component: About,
-                path: "about"
-            },
-            {
                 Component: Render,
                 path:"render"
+            },
+            {
+                Component: Generate3D,
+                path:"generate3d"
+            },
+            {
+                Component: Gallery,
+                path: "gallery"
+            },
+            {
+                Component: CommunityPage,
+                path:"community"
+            },
+            {
+                Component: ProjectsPage,
+                path:"projects"
             }
         ]
     },

@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <div className="container flex flex-col mx-auto">
+      <div className="flex flex-col mx-auto">
         <CommonLayout>
         <Outlet/>
       </CommonLayout>
