@@ -103,10 +103,11 @@ export function ChartAreaInteractive() {
           <ToggleGroup
             type="single"
             value={timeRange}
-            onValueChange={setTimeRange}
+            onValueChange={(value) => setTimeRange(value as "3d" | "7d" | "15d" | "30d")}
             variant="outline"
             className="hidden *:data-[slot=toggle-group-item]:!px-4 @[767px]/card:flex"
           >
+
             <ToggleGroupItem value="3d">Last 3 Days</ToggleGroupItem>
             <ToggleGroupItem value="7d">Last 7 Days</ToggleGroupItem>
             <ToggleGroupItem value="15d">Last 15 Days</ToggleGroupItem>
@@ -114,7 +115,8 @@ export function ChartAreaInteractive() {
           </ToggleGroup>
 
           {/* Mobile dropdown */}
-          <Select value={timeRange} onValueChange={setTimeRange}>
+          <Select value={timeRange} onValueChange={(value) => setTimeRange(value as "3d" | "7d" | "15d" | "30d")}>
+
             <SelectTrigger
               className="flex w-40 **:data-[slot=select-value]:block **:data-[slot=select-value]:truncate @[767px]/card:hidden"
               size="sm"
@@ -176,5 +178,5 @@ export function ChartAreaInteractive() {
         </ChartContainer>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
