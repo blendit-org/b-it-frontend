@@ -10,19 +10,27 @@ import {
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { cn } from "@/lib/utils"
 import BlendItLogo from "@/assets/icons/logo"
-import {  useUserInfoQuery } from "@/redux/features/auth/auth.api"
+import { useUserInfoQuery } from "@/redux/features/auth/auth.api"
 import { ProfileMenu } from "./ProfileMenu"
 
-
-// --- CSS for persistent underline ---
+// --- CSS for classy underline & animation ---
 const NavAnimations = () => (
   <style>{`
     .nav-link {
       position: relative;
       font-weight: 500;
-      color: #ffff;
+      color: #ffffff;
       padding-bottom: 2px;
+      letter-spacing: 0.5px;
       transition: all 0.3s ease;
+      background-color: transparent !important;
+    }
+
+    /* Hover effect: scale and letter spacing */
+    .nav-link:hover {
+      transform: scale(1.05);
+      letter-spacing: 1px;
+      background-color: transparent !important;
     }
 
     /* Base underline */
@@ -30,22 +38,25 @@ const NavAnimations = () => (
       content: '';
       position: absolute;
       left: 0;
-      bottom: 0;
+      bottom: -18px; /* align slightly below label */
       width: 0%;
       height: 2px;
       background-color: #f97316;
       border-radius: 2px;
-      transition: width 0.3s ease;
+      transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), transform 0.35s ease;
+      transform-origin: left;
     }
 
-    /* Hover underline */
+    /* Hover underline: slide in from left */
     .nav-link:hover::after {
       width: 100%;
+      transform: scaleX(1);
     }
 
     /* Active underline stays fixed */
     .nav-link-active::after {
       width: 100%;
+      transform: scaleX(1);
     }
   `}</style>
 )
@@ -59,19 +70,14 @@ const navigationLinks = [
   { href: "/projects", label: "Projects" },
 ]
 
-// const home = navigationLinks[0];
-
-// const navigate = useNavigate()
-
 export default function Navbar() {
   const { data } = useUserInfoQuery(undefined)
   const location = useLocation()
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleLogout = async () => {
     try {
       localStorage.removeItem("token")
-      // window.location.reload()
       navigate("/")
     } catch (error) {
       console.error("Failed to logout:", error)
@@ -91,28 +97,27 @@ export default function Navbar() {
           </a>
           <NavigationMenu className="max-md:hidden">
             <NavigationMenuList className="gap-4">
-              {
-                data?.email && localStorage.getItem("token") ? (
-                  navigationLinks.map((link) => (
-                <NavigationMenuItem key={link.href}>
-                  <NavigationMenuLink asChild>
-                    <Link
-                      to={link.href}
-                      className={cn(
-                        "nav-link",
-                        location.pathname === link.href && "nav-link-active"
-                      )}
+              {data?.email && localStorage.getItem("token")
+                ? navigationLinks.map((link) => (
+                    <NavigationMenuItem
+                      key={link.href}
+                      className="hover:bg-transparent"
                     >
-                      {link.label}
-                    </Link>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              ))
-                ) : (
-                    <div></div>
-              
-                )
-              }
+                      <NavigationMenuLink asChild>
+                        <Link
+                          to={link.href}
+                          className={cn(
+                            "nav-link",
+                            location.pathname === link.href &&
+                              "nav-link-active"
+                          )}
+                        >
+                          {link.label}
+                        </Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                  ))
+                : null}
             </NavigationMenuList>
           </NavigationMenu>
         </div>
@@ -122,7 +127,12 @@ export default function Navbar() {
           {data?.email && localStorage.getItem("token") ? (
             <ProfileMenu onLogout={handleLogout} />
           ) : (
-            <Button asChild variant="ghost" size="sm" className="bg-orange-600 text-white hover:scale-105 transition-transform">
+            <Button
+              asChild
+              variant="ghost"
+              size="sm"
+              className="bg-orange-600 text-white hover:scale-105 transition-transform"
+            >
               <Link to={"/login"}>Login</Link>
             </Button>
           )}

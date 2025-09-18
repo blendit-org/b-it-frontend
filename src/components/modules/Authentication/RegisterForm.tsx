@@ -111,7 +111,7 @@ export function RegisterForm({ className }: React.ComponentProps<"form">) {
             name="userId"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="font-semibold text-gray-200">User ID</FormLabel>
+                <FormLabel className="font-semibold text-gray-200">username</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="e.g. uday123"

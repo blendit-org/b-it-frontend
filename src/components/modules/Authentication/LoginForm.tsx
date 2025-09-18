@@ -49,11 +49,8 @@ export function LoginForm({ className }: React.ComponentProps<"form">) {
       localStorage.setItem("token", result.token);
       toast.success("✅ User logged in successfully!");
       navigate("/");
-    } catch (error: any) {
-      if (error.status === 401) {
-        toast.error("⚠️ Verify your account first!");
-        navigate("/verify", { state: values.email });
-      }
+    } catch (err: any) {
+      toast.error(err.data.description)
     }
   };
 
