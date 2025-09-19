@@ -14,12 +14,6 @@ export const authApi = baseApi.injectEndpoints({
       query: () => ({
         url: "/auth/logout",
         method: "POST",
-        // headers: {Authorization: `Bearer ${token}`}
-        // headers: {
-        //   ...headers,
-        //   ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        // },
-
       }),
       invalidatesTags: ["USER"],
     }),
@@ -32,14 +26,14 @@ export const authApi = baseApi.injectEndpoints({
     }),
     sendOtp: builder.mutation<IResponse<null>, ISendOtp>({
       query: (userInfo) => ({
-        url: "/otp/send",
+        url: "/auth/verify",
         method: "POST",
         data: userInfo,
       }),
     }),
     verifyOtp: builder.mutation<IResponse<null>, IVerifyOtp>({
       query: (userInfo) => ({
-        url: "/otp/verify",
+        url: "/auth/verify/confirm",
         method: "POST",
         data: userInfo,
       }),
