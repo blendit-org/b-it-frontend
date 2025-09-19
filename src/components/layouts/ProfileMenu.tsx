@@ -12,7 +12,7 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({ onLogout }) => {
   const { data: userInfo } = useUserInfoQuery(undefined);
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
-  const userName = userInfo?.fullName || "A";
+  const userName = userInfo?.fullName || "B";
 
   // Close dropdown when clicking outside
   React.useEffect(() => {
