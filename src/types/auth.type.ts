@@ -1,10 +1,10 @@
 export interface ISendOtp {
-  email: string;
+  email: string | null;
 }
 
 export interface IVerifyOtp {
-  email: string;
-  otp: string;
+  email: string | null;
+  verificationCode: string;
 }
 
 export interface ILogin {

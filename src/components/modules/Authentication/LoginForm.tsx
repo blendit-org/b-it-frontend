@@ -45,12 +45,22 @@ export function LoginForm({ className }: React.ComponentProps<"form">) {
     };
 
     try {
+      localStorage.setItem("email", userInfo.email)
       const result = await login(userInfo).unwrap();
       localStorage.setItem("token", result.token);
+      console.log(result)
       toast.success("✅ User logged in successfully!");
       navigate("/");
     } catch (err: any) {
-      toast.error(err.data.description)
+      console.log(err);
+      // toast.error(err.data.description)
+      if (err?.status === 403) {
+        toast.error("You are not Verified!!!");
+        navigate("/verify")
+      }
+      if (err?.status === 401) {
+        toast.error(err.description);
+      }
     }
   };
 

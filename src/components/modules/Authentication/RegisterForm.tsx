@@ -68,10 +68,11 @@ export function RegisterForm({ className }: React.ComponentProps<"form">) {
     };
 
     try {
+      localStorage.setItem("email", userInfo.email);
       const result = await registerUser(userInfo).unwrap();
       console.log(result);
       toast.success("🎉 User Created Successfully");
-      navigate("/login");
+      navigate("/verify");
     } catch (error) {
       console.error(error);
       toast.error("⚠️ Something went wrong");
