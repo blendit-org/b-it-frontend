@@ -6,6 +6,8 @@ import FilterControls from './FilterControl';
 import Loader from './Loader';
 import GalleryGrid from './GalleryGrid';
 import MediaModal from './MediaModel';
+import { useNavigate } from 'react-router';
+import { toast } from 'sonner';
 
 const Gallery: React.FC = () => {
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
@@ -13,6 +15,16 @@ const Gallery: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState<FilterType>(FilterType.All);
   const [selectedItem, setSelectedItem] = useState<MediaItem | null>(null);
+
+   const navigate = useNavigate();
+    
+      const email = localStorage.getItem("email");
+            useEffect(() => {
+              if (!email) {
+                navigate("/login");
+                toast.error("You need to Login First");
+              }
+            }, [email]);
 
 
   useEffect(() => {
@@ -64,7 +76,7 @@ const Gallery: React.FC = () => {
   }, [mediaItems, activeFilter]);
 
   return (
-    <div className="min-h-screen bg-black text-slate-100">
+    <div className="min-h-screen text-slate-100">
       <Header />
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <FilterControls activeFilter={activeFilter} setActiveFilter={setActiveFilter} />
@@ -72,7 +84,7 @@ const Gallery: React.FC = () => {
         {isLoading ? (
           <Loader />
         ) : error ? (
-          <div className="text-center py-20 text-red-400 bg-slate-800 rounded-lg">
+          <div className="text-center py-20 text-red-400 rounded-lg">
             <h2 className="text-2xl font-semibold">{error}</h2>
           </div>
         ) : (

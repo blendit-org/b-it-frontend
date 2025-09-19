@@ -85,16 +85,17 @@ export default function Verify() {
         console.log(res);
       if (res.message === "Verification code matches") {
         toast.success("OTP Verified", { id: toastId });
-          setConfirmed(true);
-          localStorage.removeItem("email");
-          navigate("/login")
+        setConfirmed(true);
+        navigate("/choose")
+          
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-//   ! Needed - Turned off for development
+  //   ! Needed - Turned off for development
+  
     useEffect(() => {
       if (!email) {
         navigate("/");

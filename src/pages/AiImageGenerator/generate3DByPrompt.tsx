@@ -1,7 +1,8 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Toaster, toast } from "sonner";
+import { useNavigate } from "react-router";
 
 const BASE_URL_DOWNLOAD = "http://localhost:5000/download"; // replace with your backend URL
 
@@ -9,6 +10,16 @@ const getToken = () => localStorage.getItem("token") || "";
 
 export const downloadProject = async (prompt: string, fileName?: string) => {
   const token = getToken();
+   const navigate = useNavigate();
+    
+      const email = localStorage.getItem("email");
+            useEffect(() => {
+              if (!email) {
+                navigate("/login");
+                toast.error("You need to Login First");
+              }
+            }, [email]);
+  
 
   const res = await axios.post(
     BASE_URL_DOWNLOAD,

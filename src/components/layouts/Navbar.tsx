@@ -78,10 +78,12 @@ export default function Navbar() {
   const handleLogout = async () => {
     try {
       localStorage.removeItem("token")
+      localStorage.removeItem("email");
       navigate("/")
     } catch (error) {
       console.error("Failed to logout:", error)
-      localStorage.removeItem("token")
+      localStorage.removeItem("token");
+      localStorage.removeItem("email");
       window.location.reload()
     }
   }
@@ -117,7 +119,26 @@ export default function Navbar() {
                       </NavigationMenuLink>
                     </NavigationMenuItem>
                   ))
-                : null}
+                : navigationLinks.map((link) => (
+                    <NavigationMenuItem
+                      key={link.href}
+                      className="hover:bg-transparent"
+                    >
+                      <NavigationMenuLink asChild>
+                        <Link
+                          to={link.href}
+                          className={cn(
+                            "nav-link",
+                            location.pathname === link.href &&
+                              "nav-link-active"
+                          )}
+                        >
+                          {link.label}
+                        </Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                ))
+              }
             </NavigationMenuList>
           </NavigationMenu>
         </div>

@@ -35,7 +35,7 @@ const FilterButton: React.FC<{
 
 const FilterControls: React.FC<FilterControlsProps> = ({ activeFilter, setActiveFilter }) => {
   return (
-    <div className="flex justify-center items-center space-x-2 sm:space-x-4 mb-8 p-2 bg-slate-800 rounded-lg shadow-inner">
+    <div className="flex justify-center items-center space-x-2 sm:space-x-4 mb-8 p-2 rounded-lg shadow-inner">
       <FilterButton label="All" filterType={FilterType.All} activeFilter={activeFilter} onClick={setActiveFilter} />
       <FilterButton label="Photos" filterType={FilterType.Photos} activeFilter={activeFilter} onClick={setActiveFilter} />
       <FilterButton label="Videos" filterType={FilterType.Videos} activeFilter={activeFilter} onClick={setActiveFilter} />

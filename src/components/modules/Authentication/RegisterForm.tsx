@@ -73,9 +73,8 @@ export function RegisterForm({ className }: React.ComponentProps<"form">) {
       console.log(result);
       toast.success("🎉 User Created Successfully");
       navigate("/verify");
-    } catch (error) {
-      console.error(error);
-      toast.error("⚠️ Something went wrong");
+    } catch (error:any) {
+      toast.error(error.data.detail);
     }
   };
 

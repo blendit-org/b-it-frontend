@@ -44,7 +44,7 @@ const GalleryItem: React.FC<GalleryItemProps> = ({ item, onToggleSave, onSelectI
       {/* Save Button */}
       <button
         onClick={handleSaveClick}
-        className="absolute top-3 right-3 bg-black/50 p-2 rounded-full backdrop-blur-sm transition-transform duration-200 ease-in-out hover:scale-110 active:scale-125 focus:outline-none focus:ring-2 focus:ring-orange-500"
+        className="absolute top-3 right-3 p-2 rounded-full backdrop-blur-sm transition-transform duration-200 ease-in-out hover:scale-110 active:scale-125 focus:outline-none focus:ring-2 focus:ring-orange-500"
         aria-label={isSaved ? 'Unsave item' : 'Save item'}
       >
         <HeartIcon isSaved={isSaved} />

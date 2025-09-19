@@ -11,7 +11,7 @@ interface GalleryGridProps {
 const GalleryGrid: React.FC<GalleryGridProps> = ({ items, onToggleSave, onSelectItem }) => {
   if (items.length === 0) {
     return (
-      <div className="text-center py-20 bg-slate-800 rounded-lg">
+      <div className="text-center py-20 rounded-lg">
         <h2 className="text-2xl font-semibold text-slate-400">No items found.</h2>
         <p className="text-slate-500 mt-2">Try changing your filter or saving some items!</p>
       </div>

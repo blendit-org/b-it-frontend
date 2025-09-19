@@ -30,7 +30,7 @@ const MediaModal: React.FC<MediaModalProps> = ({ item, onClose }) => {
       aria-labelledby="media-title"
     >
       <div
-        className="bg-slate-900 rounded-lg shadow-2xl shadow-orange-500/20 w-full max-w-4xl max-h-[90vh] flex flex-col relative animate-scale-up"
+        className=" rounded-lg shadow-2xl shadow-orange-500/20 w-full max-w-4xl max-h-[90vh] flex flex-col relative animate-scale-up"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="p-4 border-b border-slate-700 flex-shrink-0">

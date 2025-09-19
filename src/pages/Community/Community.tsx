@@ -22,6 +22,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
+import { useNavigate } from "react-router";
 
 // FIX: Replaced environment variable with a hardcoded value to resolve compilation error.
 const API_BASE = "http://localhost:8000";
@@ -97,6 +98,16 @@ export default function Community() {
   const [chatLoading, setChatLoading] = useState(false);
   const [openPosts, setOpenPosts] = useState<Record<number, boolean>>({});
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
+
+   const navigate = useNavigate();
+  
+    const email = localStorage.getItem("email");
+          useEffect(() => {
+            if (!email) {
+              navigate("/login");
+              toast.error("You need to Login First");
+            }
+          }, [email]);
 
   const POSTS_PER_PAGE = 5;
 

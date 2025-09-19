@@ -1,10 +1,22 @@
 "use client";
 
 import { Wand2, FileText } from "lucide-react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 const Generate3D = () => {
+
   const navigate = useNavigate();
+    
+  const email = localStorage.getItem("email");
+  useEffect(() => {
+    if (!email) {
+      navigate("/login");
+      toast.error("You need to Login First");
+    }
+  }, [email]);
+
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6">
