@@ -56,7 +56,7 @@ const Home = () => {
         <div className="container flex flex-col mx-auto">
           {/* "Get Started" Section with Typewriter Effect */}
           <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 mb-12">
-            <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-gray-800 dark:text-gray-200 min-h-text">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-gray-800 dark:text-gray-200 h-15">
               <span className="text-gradient-orange">
                 <span
                   className="typewriter"
@@ -127,7 +127,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <TestRequests />
     </>
   );
 };
