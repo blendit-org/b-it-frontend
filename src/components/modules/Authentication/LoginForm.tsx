@@ -50,7 +50,7 @@ export function LoginForm({ className }: React.ComponentProps<"form">) {
       localStorage.setItem("token", result.token);
       console.log(result)
       toast.success("✅ User logged in successfully!");
-      navigate("/choose");
+      navigate("/");
     } catch (err: any) {
       console.log(err);
       // toast.error(err.data.description)

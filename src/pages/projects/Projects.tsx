@@ -2,9 +2,21 @@ import React, { useEffect, useState } from "react";
 import { ProgressCard } from "./ProgressCard";
 import { fetchProjects, type Project } from "./project.api";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
 
 export const ProjectsPage: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
+
+   const navigate = useNavigate();
+    
+      const email = localStorage.getItem("email");
+            useEffect(() => {
+              if (!email) {
+                navigate("/login");
+                toast.error("You need to Login First");
+              }
+            }, [email]);
 
   useEffect(() => {
     const loadProjects = async () => {

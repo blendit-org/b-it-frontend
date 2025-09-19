@@ -1,8 +1,20 @@
 import { RenderFile } from "@/pages/Render/fileInput";
 import { RenderingProgressDashboard } from "../projects/RenderingProgressDashborad";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router";
+import { toast } from "sonner";
+import { useEffect } from "react";
 
 const Render = () => {
+   const navigate = useNavigate();
+    
+      const email = localStorage.getItem("email");
+            useEffect(() => {
+              if (!email) {
+                navigate("/login");
+                toast.error("You need to Login First");
+              }
+            }, [email]);
   return (
     <motion.div
       className="container mx-auto flex flex-col px-4 md:px-6 lg:px-8"
