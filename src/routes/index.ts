@@ -7,8 +7,8 @@ import Register from "@/pages/Auth/Register";
 import Render from "@/pages/Render/Render";
 import Verify from "@/pages/Auth/Verify";
 import { createBrowserRouter } from "react-router";
-import { CommunityPage } from "@/pages/Community/Community";
 import { ProjectsPage } from "@/pages/projects/Projects";
+import Community from "@/pages/Community/Community";
 
 const router = createBrowserRouter([
     {
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
                 path: "gallery"
             },
             {
-                Component: CommunityPage,
+                Component: Community,
                 path:"community"
             },
             {
