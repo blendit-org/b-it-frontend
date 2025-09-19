@@ -9,6 +9,10 @@ import Verify from "@/pages/Auth/Verify";
 import { createBrowserRouter } from "react-router";
 import { ProjectsPage } from "@/pages/projects/Projects";
 import Community from "@/pages/Community/Community";
+import PromptDownloadPage from "@/pages/AiImageGenerator/generate3DByPrompt";
+import GeneratorComponent from "@/pages/AiImageGenerator/generatorImageOR3D";
+import chooseUser from "@/pages/chooseUser";
+import Worker from "@/pages/Worker";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +42,14 @@ const router = createBrowserRouter([
             {
                 Component: ProjectsPage,
                 path:"projects"
+            },
+            {
+                Component: PromptDownloadPage,
+                path: "blend"
+            },
+            {
+                Component: GeneratorComponent,
+                path: "textimage3D"
             }
         ]
     },
@@ -52,6 +64,14 @@ const router = createBrowserRouter([
     {
         Component: Verify,
         path:"/verify"
+    },
+    {
+        Component: chooseUser,
+        path: "/choose"
+    },
+    {
+        Component: Worker,
+        path:"/worker"
     }
 ]);
 

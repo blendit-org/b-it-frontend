@@ -2,6 +2,7 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router";
 
 interface ProfileMenuProps {
   onLogout: () => void;
@@ -10,6 +11,7 @@ interface ProfileMenuProps {
 export const ProfileMenu: React.FC<ProfileMenuProps> = ({ onLogout }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const { data: userInfo } = useUserInfoQuery(undefined);
+  const navigate = useNavigate()
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
   const userName = userInfo?.fullName || "B";
@@ -85,6 +87,10 @@ export const ProfileMenu: React.FC<ProfileMenuProps> = ({ onLogout }) => {
                   <div className="text-sm font-semibold text-gray-800 dark:text-gray-200">
                     <span className="block text-xs text-gray-500 dark:text-gray-400">Score</span>
                     {userInfo.score}
+                  </div>
+                  <div className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+                    <span className="block text-xs text-gray-500 dark:text-gray-400">Score</span>
+                    <p onClick={()=> navigate("/worker")}>Join as Worker</p>
                   </div>
                 </motion.div>
               )}
