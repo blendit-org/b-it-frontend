@@ -3,18 +3,28 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { downloadProject, fetchProjectProgress, type IStatus, type Project } from "./project.api";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 interface ProgressCardProps {
   project: Project;
-  context: "projects" | "dashboard"; // determines what button to show
+  context: "projects" | "dashboard";
   onGoToProjects?: () => void;
 }
 
 export const ProgressCard: React.FC<ProgressCardProps> = ({ project, context, onGoToProjects }) => {
   const [progress, setProgress] = useState<IStatus | null>(null);
-  const [loadingDownload, setLoadingDownload] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
+  const [loadingDownload, setLoadingDownload] = useState(false);
 
+  const LOCAL_STORAGE_KEY = "downloadingProjects";
+
+  // Load download status from localStorage
+  useEffect(() => {
+    const downloading = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || "[]") as number[];
+    setLoadingDownload(downloading.includes(project.projectId));
+  }, [project.projectId]);
+
+  // Fetch project rendering progress
   useEffect(() => {
     if (project.renderingDone) return;
 
@@ -31,7 +41,7 @@ export const ProgressCard: React.FC<ProgressCardProps> = ({ project, context, on
       }
     };
 
-    fetchProgress(); // initial fetch
+    fetchProgress();
     const interval = setInterval(fetchProgress, 3000);
     return () => clearInterval(interval);
   }, [project]);
@@ -42,13 +52,33 @@ export const ProgressCard: React.FC<ProgressCardProps> = ({ project, context, on
 
   const handleDownload = async () => {
     setLoadingDownload(true);
+
+    // Add to localStorage
+    const downloading = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || "[]") as number[];
+    if (!downloading.includes(project.projectId)) {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...downloading, project.projectId]));
+    }
+
+    // Show a “Soon” toast immediately
+    toast(`Download for project #${project.fileName} started!`);
+
     try {
-      alert("Your download is in progress. The file will be downloaded shortly.");
       await downloadProject(project.projectId, project.fileName);
+
+      // Show success toast
+      toast.success(`${project.fileName} Download Complete`);
+
+      // Remove from localStorage and stop spinner
+      const updated = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || "[]") as number[];
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updated.filter(id => id !== project.projectId)));
+      setLoadingDownload(false);
+
     } catch (err) {
       console.error(err);
-      alert("Download failed. Try again.");
-    } finally {
+      toast.error("Download failed. Try again.");
+
+      const updated = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || "[]") as number[];
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updated.filter(id => id !== project.projectId)));
       setLoadingDownload(false);
     }
   };
@@ -66,12 +96,13 @@ export const ProgressCard: React.FC<ProgressCardProps> = ({ project, context, on
           <CardTitle className="text-lg font-semibold text-orange-400">
             {project.fileName || `Project #${project.projectId}`}
           </CardTitle>
-          <p className={`font-semibold ${project.renderingDone ? "text-green-400" : "text-yellow-400"}`}>
-            {project.renderingDone
-              ? "✅ Completed"
-              : isFetching
-              ? "⏳ Fetching progress..."
-              : "⏳ Rendering"}
+          <p className={`font-semibold ${project.renderingDone ? "text-green-400" : "text-yellow-400"} flex items-center justify-center gap-2`}>
+            {project.renderingDone ? "✅ Completed" :
+              <>
+                Rendering
+                <span className="animate-spin">⏳</span>
+              </>
+            }
           </p>
           {!project.renderingDone && progress && (
             <p className="text-sm text-gray-400 mt-1">
@@ -97,10 +128,11 @@ export const ProgressCard: React.FC<ProgressCardProps> = ({ project, context, on
 
           {project.renderingDone && context === "projects" && (
             <Button
-              className="bg-orange-500 hover:bg-orange-600 text-white mt-3 shadow-lg shadow-orange-500/30 transition transform hover:scale-105"
+              className="bg-orange-500 hover:bg-orange-600 text-white mt-3 shadow-lg shadow-orange-500/30 transition transform hover:scale-105 flex items-center justify-center gap-2"
               onClick={handleDownload}
               disabled={loadingDownload}
             >
+              {loadingDownload && <span className="animate-spin">⏳</span>}
               {loadingDownload ? "Downloading..." : "Download File"}
             </Button>
           )}

@@ -4,7 +4,6 @@ import { SectionCards } from "@/components/ui/section-cards";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import "./home.css";
-import { TestRequests } from "../Render/test";
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api";
 import { motion } from "framer-motion";
 
@@ -54,7 +53,6 @@ const Home = () => {
     <>
       <div className="relative min-h-screen w-full py-20 px-4 transition-colors duration-500 md:px-6 lg:px-8">
         <div className="container flex flex-col mx-auto">
-          {/* "Get Started" Section with Typewriter Effect */}
           <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 mb-12">
             <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-gray-800 dark:text-gray-200 h-15">
               <span className="text-gradient-orange">
@@ -117,8 +115,6 @@ const Home = () => {
               </motion.div>
             )}
           </div>
-
-          {/* Existing Dashboard Content */}
           <div className="mb-15">
             <ChartAreaInteractive />
           </div>

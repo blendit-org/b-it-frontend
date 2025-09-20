@@ -51,11 +51,11 @@ export function SectionCards() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const userResult = await axios.get<UsersResponse>("http://10.201.48.47:8005/public/");
-        setUsers(userResult.data.totalUsers || 0);
+        const userResult = await axios.get<UsersResponse>("http://10.201.48.47:8000/public/");
+        setUsers(userResult.data.totalUsers ?? 0);
 
         const frameResult = await axios.get<FramesResponse>("http://10.201.48.47:4009/stats/general");
-        setTotalFrames(frameResult.data.totalFrames || 0);
+        setTotalFrames(frameResult.data.totalFrames ?? 0);
       } catch (err) {
         console.error("Error fetching stats:", err);
       }
@@ -64,57 +64,39 @@ export function SectionCards() {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 lg:px-6">
-      <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
-        <Card>
-          <CardHeader>
-            <CardDescription>Total Rendered</CardDescription>
-            <CardTitle className="text-2xl font-semibold tabular-nums">
-              <AnimatedNumber value={totalFrames} />
-            </CardTitle>
-            <CardAction>
-              <Badge variant="outline" className="flex items-center gap-1">
-                <IconTrendingUp size={16} />
-              </Badge>
-            </CardAction>
-          </CardHeader>
-          <CardFooter className="flex flex-col gap-1.5 text-sm"></CardFooter>
-        </Card>
-      </motion.div>
-
-      <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
-        <Card>
-          <CardHeader>
-            <CardDescription>Total Users</CardDescription>
-            <CardTitle className="text-2xl font-semibold tabular-nums">
-              <AnimatedNumber value={users} />
-            </CardTitle>
-            <CardAction>
-              <Badge variant="outline" className="flex items-center gap-1">
-                <IconTrendingDown size={16} />
-              </Badge>
-            </CardAction>
-          </CardHeader>
-          <CardFooter className="flex flex-col gap-1.5 text-sm"></CardFooter>
-        </Card>
-      </motion.div>
-
-      <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
-        <Card>
-          <CardHeader>
-            <CardDescription>Active Workers</CardDescription>
-            <CardTitle className="text-2xl font-semibold tabular-nums">
-              <AnimatedNumber value={4678} />
-            </CardTitle>
-            <CardAction>
-              <Badge variant="outline" className="flex items-center gap-1">
-                <IconTrendingUp size={16} />
-              </Badge>
-            </CardAction>
-          </CardHeader>
-          <CardFooter className="flex flex-col gap-1.5 text-sm"></CardFooter>
-        </Card>
-      </motion.div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 lg:px-6">
+      {[
+        { title: "Total Rendered", value: totalFrames, trend: "up" },
+        { title: "Total Users", value: users, trend: "down" },
+        { title: "Active Workers", value: 3, trend: "up" },
+      ].map((item, idx) => (
+        <motion.div key={idx} whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
+          <Card className="p-6 border border-orange-500 rounded-xl hover:shadow-2xl transition-shadow duration-300">
+            <CardHeader className="flex flex-col gap-2">
+              <CardDescription className="text-gray-400 uppercase tracking-wider">{item.title}</CardDescription>
+              <CardTitle className="text-2xl sm:text-3xl font-bold tabular-nums text-white">
+                <AnimatedNumber value={item.value} />
+              </CardTitle>
+              <CardAction>
+                {/* <Badge variant="outline" className="flex items-center gap-1 text-orange-400">
+                  {item.trend === "up" ? <IconTrendingUp size={16} /> : <IconTrendingDown size={16} />}
+                  {item.trend === "up" ? "Increasing" : "Decreasing"}
+                </Badge> */}
+              </CardAction>
+            </CardHeader>
+            <CardFooter className="flex flex-col gap-1.5 text-sm text-gray-400">
+              {/* Additional content inside footer */}
+              <p>
+                {item.title === "Total Users"
+                  ? "Number of active users in the platform."
+                  : item.title === "Total Rendered"
+                  ? "Total frames rendered across all projects."
+                  : "Current active workers processing tasks."}
+              </p>
+            </CardFooter>
+          </Card>
+        </motion.div>
+      ))}
     </div>
   );
 }

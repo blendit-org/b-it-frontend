@@ -17,7 +17,7 @@ const WorkerPage = () => {
       toast.error("You need to Login First");
     }
   }, [email]);
-  const downloadUrl = "/path/to/your/file.exe"; // replace with your actual file URL
+  const downloadUrl = "https://github.com/blendit-org/b-it-frontend/releases/download/beta/blendit-0.0.1-setup.exe"; 
   
 
   return (
@@ -37,7 +37,7 @@ const WorkerPage = () => {
         transition={{ duration: 1 }}
         className="text-4xl sm:text-5xl font-bold text-white mt-20 mb-12 text-center"
       >
-        Worker Tools
+        Workers Tool
       </motion.h1>
 
       {/* Download Card */}
@@ -74,34 +74,6 @@ const WorkerPage = () => {
         >
           Download EXE
         </motion.a>
-      </motion.div>
-
-      {/* Video Label */}
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.5 }}
-        className="mt-16 text-2xl font-semibold text-white text-center tracking-wide"
-      >
-        Know details about worker tool
-      </motion.h2>
-
-      {/* Video Section */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.7 }}
-        className="mt-6 w-full max-w-4xl aspect-video rounded-2xl overflow-hidden shadow-lg border border-[#ff6600]/40"
-      >
-        <iframe
-          className="w-full h-full"
-          src="https://www.youtube.com/embed/HQtkFlKDi8E?si=vKIXbO3VgUJV3e-p"  // replace with your video link
-          title="Worker Tutorial Video"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        ></iframe>
-        
       </motion.div>
     </div>
   );
