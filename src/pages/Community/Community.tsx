@@ -25,7 +25,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router";
 
 // FIX: Replaced environment variable with a hardcoded value to resolve compilation error.
-const API_BASE = "http://localhost:8000";
+const API_BASE = "http://10.201.48.109:8000";
 
 export type PostResponse = {
   id: number;
@@ -81,7 +81,7 @@ const orangeGrad = "";
 
 export default function Community() {
   // FIX: Removed Redux dependency to resolve compilation error and make the component standalone.
-  const {data: userInfo} = useUserInfoQuery(undefined);
+  const { data: userInfo } = useUserInfoQuery(undefined);
   const userId = userInfo?.userId
 
   const [posts, setPosts] = useState<PostResponse[]>([]);
@@ -99,15 +99,15 @@ export default function Community() {
   const [openPosts, setOpenPosts] = useState<Record<number, boolean>>({});
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   
-    const email = localStorage.getItem("email");
-          useEffect(() => {
-            if (!email) {
-              navigate("/login");
-              toast.error("You need to Login First");
-            }
-          }, [email]);
+  const email = localStorage.getItem("email");
+  useEffect(() => {
+    if (!email) {
+      navigate("/login");
+      toast.error("You need to Login First");
+    }
+  }, [email]);
 
   const POSTS_PER_PAGE = 5;
 
@@ -130,8 +130,8 @@ export default function Community() {
               allComments[post.id] = Array.isArray(cData) ? cData : [];
             } catch (commentErr) {
               toast.error(`Failed to fetch comments for post ${post.id}:`)
-               console.error(`Failed to fetch comments for post ${post.id}:`, commentErr);
-               allComments[post.id] = []; // Avoid leaving it undefined on error
+              console.error(`Failed to fetch comments for post ${post.id}:`, commentErr);
+              allComments[post.id] = []; // Avoid leaving it undefined on error
             }
           })
         );
@@ -301,123 +301,127 @@ export default function Community() {
       {/* Main Grid */}
       <main className="px-4 md:px-8 pb-10 grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Chat Column */}
-       <section className="lg:col-span-1 w-full">
-  <Card className={`rounded-3xl ${glass} h-[78vh] flex flex-col`}>
-    {/* Header */}
-    <CardHeader className="pb-2">
-      <CardTitle className="flex items-center gap-2 text-base md:text-lg">
-        <MessageSquareText className="h-5 w-5 text-orange-300 shrink-0" />
-        <span className="truncate">Realtime Chat</span>
-        <Badge className="ml-auto bg-orange-500/20 text-orange-300 border border-orange-400/20 whitespace-nowrap">
-          {chatLoading ? "syncing…" : "live"}
-        </Badge>
-      </CardTitle>
-    </CardHeader>
-
-    <Separator className="bg-white/10" />
-
-    {/* Chat Messages */}
-    <CardContent className="flex-1 overflow-hidden p-0">
-      <ScrollArea ref={chatContainerRef} className="h-full px-4 py-3">
-        <div className="space-y-3">
-          {chat.length === 0 ? (
-            <EmptyState label="No messages yet. Start the conversation!" />
-          ) : (
-            chat.map((m) => {
-              const isMine = m.userId === userId;
-              return (
-                <div
-                  key={m.id}
-                  className={`flex w-full ${
-                    isMine ? "justify-end" : "justify-start"
-                  }`}
+        <section className="lg:col-span-1 w-full">
+          <Card className={`rounded-3xl ${glass} h-[78vh] flex flex-col`}>
+            {/* Header */}
+            <CardHeader className="pb-2">
+              <CardTitle className="flex items-center gap-2 text-base md:text-lg">
+                <MessageSquareText className="h-5 w-5 text-orange-300 shrink-0" />
+                <span className="truncate">Realtime Chat</span>
+                <Badge
+                  className={`ml-auto border border-orange-400/20 whitespace-nowrap ${chatLoading
+                    ? "bg-orange-500/20 text-orange-300"
+                    : "bg-orange-500 text-white animate-pulse"
+                    }`}
                 >
-                  {/* Other Users */}
-                  {!isMine && (
-                    <div className="flex items-start gap-2 max-w-[80%]">
-                      <Avatar className="h-8 w-8 border border-white/10 shrink-0">
-                        <AvatarFallback className="bg-orange-500/20 text-orange-200">
-                          {(m.userId?.slice(0, 2) || "??").toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div
-                        className={`${glass} relative rounded-2xl px-3 py-2 break-words whitespace-pre-wrap`}
-                      >
-                        {/* Tail */}
-                        <span className="absolute left-[-6px] top-3 w-0 h-0 border-t-8 border-t-transparent border-r-8 border-r-white/20 border-b-8 border-b-transparent" />
-                        <div className="text-xs text-white/60 mb-0.5">
-                          {m.userId} • {new Date(m.createdAt).toLocaleString()}
-                        </div>
-                        <div className="text-sm leading-relaxed">
-                          {m.message}
-                        </div>
-                      </div>
-                    </div>
-                  )}
+                  {chatLoading ? "" : "live"}
+                </Badge>
+              </CardTitle>
+            </CardHeader>
 
-                  {/* My Messages */}
-                  {isMine && (
-                    <div className="flex items-start gap-2 max-w-[80%]">
-                      <div className="relative bg-orange-500/20 text-orange-100 rounded-2xl px-3 py-2 break-words whitespace-pre-wrap">
-                        {/* Tail */}
-                        <span className="absolute right-[-6px] top-3 w-0 h-0 border-t-8 border-t-transparent border-l-8 border-l-orange-500/20 border-b-8 border-b-transparent" />
-                        <div className="text-xs text-white/60 mb-0.5">
-                          {m.userId} • {new Date(m.createdAt).toLocaleString()}
+            <Separator className="bg-white/10" />
+
+            {/* Chat Messages */}
+            <CardContent className="flex-1 overflow-hidden p-0">
+              <ScrollArea ref={chatContainerRef} className="h-full px-4 py-3">
+                <div className="space-y-3">
+                  {chat.length === 0 ? (
+                    <EmptyState label="No messages yet. Start the conversation!" />
+                  ) : (
+                    chat.map((m) => {
+                      const isMine = m.userId === userId;
+                      return (
+                        <div
+                          key={m.id}
+                          className={`flex w-full ${isMine ? "justify-end" : "justify-start"
+                            }`}
+                        >
+                          {/* Other Users */}
+                          {!isMine && (
+                            <div className="flex items-start gap-2 max-w-[80%]">
+                              <Avatar className="h-8 w-8 border border-white/10 shrink-0">
+                                <AvatarFallback className="bg-orange-500/20 text-orange-200">
+                                  {(m.userId?.slice(0, 2) || "??").toUpperCase()}
+                                </AvatarFallback>
+                              </Avatar>
+                              <div
+                                className={`${glass} relative rounded-2xl px-3 py-2 break-words whitespace-pre-wrap`}
+                              >
+                                {/* Tail */}
+                                <span className="absolute left-[-6px] top-3 w-0 h-0 border-t-8 border-t-transparent border-r-8 border-r-white/20 border-b-8 border-b-transparent" />
+                                <div className="text-xs text-white/60 mb-0.5">
+                                  {m.userId} • {new Date(m.createdAt).toLocaleString()}
+                                </div>
+                                <div className="text-sm leading-relaxed">
+                                  {m.message}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* My Messages */}
+                          {isMine && (
+                            <div className="flex items-start gap-2 max-w-[80%]">
+                              <div className="relative bg-orange-500/20 text-orange-100 rounded-2xl px-3 py-2 break-words whitespace-pre-wrap">
+                                {/* Tail */}
+                                <span className="absolute right-[-6px] top-3 w-0 h-0 border-t-8 border-t-transparent border-l-8 border-l-orange-500/20 border-b-8 border-b-transparent" />
+                                <div className="text-xs text-white/60 mb-0.5">
+                                  {m.userId} • {new Date(m.createdAt).toLocaleString()}
+                                </div>
+                                <div className="text-sm leading-relaxed">
+                                  {m.message}
+                                </div>
+                              </div>
+                              <Button
+                                onClick={() => deleteChat(m.id)}
+                                variant="ghost"
+                                className="h-6 w-6 p-0 text-red-400 hover:text-red-300 shrink-0"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          )}
                         </div>
-                        <div className="text-sm leading-relaxed">
-                          {m.message}
-                        </div>
-                      </div>
-                      <Button
-                        onClick={() => deleteChat(m.id)}
-                        variant="ghost"
-                        className="h-6 w-6 p-0 text-red-400 hover:text-red-300 shrink-0"
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </div>
+                      );
+                    })
                   )}
                 </div>
-              );
-            })
-          )}
-        </div>
-      </ScrollArea>
-    </CardContent>
+              </ScrollArea>
+            </CardContent>
 
-    <Separator className="bg-white/10" />
+            <Separator className="bg-white/10" />
 
-    {/* Input */}
-    <div className="p-3 flex items-center gap-2">
-      <Input
-        value={chatMsg}
-        onChange={(e) => setChatMsg(e.target.value)}
-        placeholder="Type a message…"
-        className="bg-transparent border-white/15 focus-visible:ring-orange-500/40 flex-1 min-w-0"
-        onKeyDown={(e) => {
-          if (e.key === "Enter" && !e.shiftKey) {
-            e.preventDefault();
-            sendChat();
-          }
-        }}
-      />
-      <Button
-        onClick={sendChat}
-        disabled={sending || !chatMsg.trim()}
-        className={`${orangeGrad} text-white border-0 shadow-lg shrink-0`}
-      >
-        <Send className="h-4 w-4" />
-      </Button>
-    </div>
-  </Card>
-</section>
+            {/* Input */}
+            <div className="p-3 flex items-center gap-2">
+              <Input
+                value={chatMsg}
+                onChange={(e) => setChatMsg(e.target.value)}
+                placeholder="Type a message…"
+                className="bg-transparent border-white/15 focus-visible:ring-orange-500/40 flex-1 min-w-0"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    sendChat();
+                  }
+                }}
+              />
+              <Button
+                onClick={sendChat}
+                disabled={sending || !chatMsg.trim()}
+                className={`${orangeGrad} text-white border-0 shadow-lg shrink-0`}
+              >
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
+          </Card>
+        </section>
 
 
 
 
 
         {/* Posts Column */}
-        <section className="lg:col-span-2 space-y-6">
+        <section className="lg:col-span-2 space-y-6 overflow-y-auto max-h-[80vh] p-2">
           {/* Create Post */}
           <Card className={`rounded-3xl ${glass}`}>
             <CardHeader>
@@ -439,28 +443,30 @@ export default function Community() {
             </CardContent>
           </Card>
 
-          {/* Posts List */}
-          <div className="space-y-4">
-            {posts.length === 0 ? (
-              <EmptyState label="No posts yet. Be the first!" />
-            ) : (
-              posts.map((p) => (
-                <PostCard
-                  key={p.id}
-                  post={p}
-                  comments={comments[p.id]}
-                  commentValue={commentInputs[p.id] || ""}
-                  onChangeComment={(v) => setCommentInputs((ci) => ({ ...ci, [p.id]: v }))}
-                  onSubmitComment={() => addComment(p.id)}
-                  onDeletePost={() => deletePost(p.id)}
-                  onDeleteComment={(cid) => deleteComment(cid, p.id)}
-                  open={openPosts[p.id] || false}
-                  onToggleOpen={() => setOpenPosts((prev) => ({ ...prev, [p.id]: !prev[p.id] }))}
-                  currentUserId={userId}
-                />
-              ))
-            )}
-          </div>
+
+  {/* Posts List */}
+  <div className="space-y-4">
+    {posts.length === 0 ? (
+      <EmptyState label="No posts yet. Be the first!" />
+    ) : (
+      posts.map((p) => (
+        <PostCard
+          key={p.id}
+          post={p}
+          comments={comments[p.id]}
+          commentValue={commentInputs[p.id] || ""}
+          onChangeComment={(v) => setCommentInputs((ci) => ({ ...ci, [p.id]: v }))}
+          onSubmitComment={() => addComment(p.id)}
+          onDeletePost={() => deletePost(p.id)}
+          onDeleteComment={(cid) => deleteComment(cid, p.id)}
+          open={openPosts[p.id] || false}
+          onToggleOpen={() => setOpenPosts((prev) => ({ ...prev, [p.id]: !prev[p.id] }))}
+          currentUserId={userId}
+        />
+      ))
+    )}
+  </div>
+
 
           {/* Pagination */}
           {totalPosts > POSTS_PER_PAGE && (
@@ -474,7 +480,7 @@ export default function Community() {
       </main>
     </div>
   );
-}
+};
 
 // --- PostCard Component ---
 function PostCard({

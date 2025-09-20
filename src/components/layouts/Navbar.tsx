@@ -13,7 +13,6 @@ import BlendItLogo from "@/assets/icons/logo"
 import { useUserInfoQuery } from "@/redux/features/auth/auth.api"
 import { ProfileMenu } from "./ProfileMenu"
 
-// --- CSS for classy underline & animation ---
 const NavAnimations = () => (
   <style>{`
     .nav-link {
@@ -66,7 +65,6 @@ const navigationLinks = [
   { href: "/render", label: "Render" },
   { href: "/generate3d", label: "Generate 3D" },
   { href: "/community", label: "Community" },
-  { href: "/gallery", label: "Gallery" },
   { href: "/projects", label: "Projects" },
 ]
 

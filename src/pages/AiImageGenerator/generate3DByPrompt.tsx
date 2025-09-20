@@ -4,7 +4,7 @@ import axios from "axios";
 import { Toaster, toast } from "sonner";
 import { useNavigate } from "react-router";
 
-const BASE_URL_DOWNLOAD = "http://localhost:5000/download"; // replace with your backend URL
+const BASE_URL_DOWNLOAD = "http://localhost:5000/download"; 
 
 const getToken = () => localStorage.getItem("token") || "";
 

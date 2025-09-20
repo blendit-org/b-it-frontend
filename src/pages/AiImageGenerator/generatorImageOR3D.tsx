@@ -69,7 +69,7 @@ const GeneratorComponent = () => {
       setError("Please enter a prompt.");
       return;
     }
-    const res = await fetch("http://localhost:8000/generate-image", {
+    const res = await fetch("http://10.201.48.109:7000/generate-image", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ prompt }),
@@ -94,7 +94,7 @@ const GeneratorComponent = () => {
     }
     const formData = new FormData();
     formData.append("image", inputFile);
-    const res = await fetch("http://localhost:8000/generate3d", { method: "POST", body: formData });
+    const res = await fetch("http://10.201.48.109:7000/generate3d", { method: "POST", body: formData });
     if (!res.ok) {
       setError("Failed to generate 3D model.");
       return;

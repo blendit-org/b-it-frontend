@@ -3,7 +3,6 @@
 import * as React from "react"
 import axios from "axios"
 import { Area, AreaChart, CartesianGrid, XAxis } from "recharts"
-import { useIsMobile } from "@/hooks/use-mobile"
 import {
   Card,
   CardAction,
@@ -40,14 +39,9 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function ChartAreaInteractive() {
-  const isMobile = useIsMobile()
   const [timeRange, setTimeRange] = React.useState<"3d" | "7d" | "15d" | "30d">("30d")
   const [chartData, setChartData] = React.useState<{ date: string; render: number }[]>([])
   const [totalFrames, setTotalFrames] = React.useState<number>(0)
-
-  React.useEffect(() => {
-    if (isMobile) setTimeRange("3d")
-  }, [isMobile])
 
   React.useEffect(() => {
     const fetchStats = async () => {

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { ProgressCard } from "./ProgressCard";
 import { fetchProjects, type Project } from "./project.api";
@@ -7,37 +9,53 @@ import { toast } from "sonner";
 
 export const ProjectsPage: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
+  const [searchTerm, setSearchTerm] = useState(""); // For search
+  const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
 
-   const navigate = useNavigate();
-    
-      const email = localStorage.getItem("email");
-            useEffect(() => {
-              if (!email) {
-                navigate("/login");
-                toast.error("You need to Login First");
-              }
-            }, [email]);
+  const navigate = useNavigate();
+  const email = localStorage.getItem("email");
 
+  // Check login
+  useEffect(() => {
+    if (!email) {
+      navigate("/login");
+      toast.error("You need to Login First");
+    }
+  }, [email]);
+
+  // Load projects
   useEffect(() => {
     const loadProjects = async () => {
       try {
         const files = await fetchProjects();
-        setProjects(files.filter(p => p.renderingDone)); // only completed
+        const completed = files.filter((p) => p.renderingDone);
+        setProjects(completed);
+        setFilteredProjects(completed);
       } catch (err) {
         console.error(err);
         setProjects([]);
+        setFilteredProjects([]);
       }
     };
     loadProjects();
   }, []);
 
+  // Filter projects based on search
+  useEffect(() => {
+    const filtered = projects.filter((p) =>
+      p.fileName.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredProjects(filtered);
+  }, [searchTerm, projects]);
+
   return (
     <div className="container flex flex-col mx-auto mt-5 p-5">
+      {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="text-center mb-10"
+        className="text-center mb-6"
       >
         <h2 className="text-3xl font-bold text-orange-500">Projects Dashboard</h2>
         <p className="mt-2 text-gray-300">
@@ -45,7 +63,24 @@ export const ProjectsPage: React.FC = () => {
         </p>
       </motion.div>
 
-      {projects.length ? (
+      {/* Search Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="flex justify-center mb-8"
+      >
+        <input
+          type="text"
+          placeholder="Search projects by name..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full max-w-md px-4 py-2 rounded-lg border border-orange-400 bg-black/30 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+        />
+      </motion.div>
+
+      {/* Projects Grid */}
+      {filteredProjects.length ? (
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           initial="hidden"
@@ -54,12 +89,12 @@ export const ProjectsPage: React.FC = () => {
             hidden: {},
             visible: {
               transition: {
-                staggerChildren: 0.1
-              }
-            }
+                staggerChildren: 0.1,
+              },
+            },
           }}
         >
-          {projects.map((project) => (
+          {filteredProjects.map((project) => (
             <motion.div
               key={project.projectId}
               initial={{ opacity: 0, y: 20 }}
