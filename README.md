@@ -1,9 +1,6 @@
 # blend:it Frontend
 
-````markdown
-# Blend:It - AI Rendering Platform
-
-**Blend:It** is a powerful Distributed Computing Rendering rendering platform that allows users to upload `.blend` or `.zip` files, render images and videos, generate 3D models, and track rendering progress. The platform features user authentication, email verification, project management, and a Worker Tool for local contributions.
+**blend:it** is a powerful Distributed Computing Rendering platform that allows users to upload `.blend` or `.zip` files, render images and videos, generate 3D models, and track rendering progress. The platform features user authentication, email verification, project management, and a Worker Tool for local contributions.
 
 ---
 
@@ -18,7 +15,6 @@
 - [Authentication Flow](#authentication-flow)
 - [Rendering & File Upload](#rendering--file-upload)
 - [Downloads](#downloads)
-- [License](#license)
 
 ---
 
