@@ -3,7 +3,7 @@
 ## Deployed!!
 ### Available : [https://blendit-org.netlify.app/](https://blendit-org.netlify.app/)
 
-**Blend:It** is a powerful **Distributed Computing Rendering Platform** that enables users to upload `.blend` files, render images/videos, generate 3D models, and track rendering progress in real time.  
+
 The platform also features **a Community Hub** for discussions, Q&A, and live chat to connect users and foster collaboration.
 
 ---
@@ -26,17 +26,7 @@ The platform also features **a Community Hub** for discussions, Q&A, and live ch
 
 ## Features
 
-- User registration, login, and email verification  
-- File upload: `.blend` or `.zip` with frame range specification  
-- 3D rendering with real-time progress tracking  
-- Projects dashboard with search and download functionality  
-- Animated UI components with Framer Motion  
-- Worker Tool for local contribution  
-- **Community Hub for collaboration**:  
-  - StackOverflow-style Q&A (questions, answers, voting, tags)  
-  - Accept answers as solutions  
-  - Real-time chat with persistent history  
-- Notifications for rendering updates and community activity  
+
 
 ---
 
@@ -58,6 +48,7 @@ The platform also features **a Community Hub** for discussions, Q&A, and live ch
 
    ```bash
    git clone https://github.com/blendit-org/blendit-frontend.git
+
    cd blendit-frontend
 
 2. Install dependencies:

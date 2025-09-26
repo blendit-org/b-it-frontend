@@ -13,15 +13,14 @@ export const ProjectsPage: React.FC = () => {
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
 
   const navigate = useNavigate();
-  const email = localStorage.getItem("email");
-
+  const token = localStorage.getItem("token");
   // Check login
   useEffect(() => {
-    if (!email) {
+    if (!token) {
       navigate("/login");
       toast.error("You need to Login First");
     }
-  }, [email]);
+  }, [token]);
 
   // Load projects
   useEffect(() => {
@@ -43,7 +42,7 @@ export const ProjectsPage: React.FC = () => {
   // Filter projects based on search
   useEffect(() => {
     const filtered = projects.filter((p) =>
-      p.fileName.toLowerCase().includes(searchTerm.toLowerCase())
+      p.fileName?.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredProjects(filtered);
   }, [searchTerm, projects]);

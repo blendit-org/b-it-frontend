@@ -46,7 +46,7 @@ export function ChartAreaInteractive() {
   React.useEffect(() => {
     const fetchStats = async () => {
       try {
-        const result = await axios.get("http://10.201.48.47:4009/stats/general")
+        const result = await axios.get("https://10.201.48.47:4009/stats/general")
         const data = result.data
         console.log("API response:", data)
 

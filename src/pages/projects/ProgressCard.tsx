@@ -13,10 +13,12 @@ interface ProgressCardProps {
 
 export const ProgressCard: React.FC<ProgressCardProps> = ({ project, context, onGoToProjects }) => {
   const [progress, setProgress] = useState<IStatus | null>(null);
-  const [isFetching, setIsFetching] = useState(false);
+  const [, setIsFetching] = useState(false);
   const [loadingDownload, setLoadingDownload] = useState(false);
 
   const LOCAL_STORAGE_KEY = "downloadingProjects";
+
+  
 
   // Load download status from localStorage
   useEffect(() => {

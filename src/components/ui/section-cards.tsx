@@ -1,5 +1,3 @@
-import { IconTrendingDown, IconTrendingUp } from "@tabler/icons-react";
-import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardAction,
@@ -51,10 +49,10 @@ export function SectionCards() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const userResult = await axios.get<UsersResponse>("http://10.201.48.47:8000/public/");
+        const userResult = await axios.get<UsersResponse>("https://34.171.206.206:80/public/");
         setUsers(userResult.data.totalUsers ?? 0);
 
-        const frameResult = await axios.get<FramesResponse>("http://10.201.48.47:4009/stats/general");
+        const frameResult = await axios.get<FramesResponse>("https://10.201.48.47:4009/stats/general");
         setTotalFrames(frameResult.data.totalFrames ?? 0);
       } catch (err) {
         console.error("Error fetching stats:", err);
